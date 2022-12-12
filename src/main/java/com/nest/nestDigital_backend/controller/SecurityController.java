@@ -44,4 +44,17 @@ public class SecurityController {
 
         return (List<Security>) securityDao.SearchSecurity(security.getEmpCode());
     }
+
+    @PostMapping(path = "/deleteSecurity", produces = "application/json", consumes = "application/json")
+    public Map<String,String> DeleteSecurity(@RequestBody Security security){
+
+        String empCode= String.valueOf(security.getEmpCode());
+        System.out.println(empCode);
+        securityDao.DeleteSecurity(security.getEmpCode());
+
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("status","success");
+        return hashMap;
+    }
+
 }
