@@ -4,7 +4,6 @@ package com.nest.nestDigital_backend.controller;
 import com.nest.nestDigital_backend.dao.EmployeeDao;
 import com.nest.nestDigital_backend.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.Map;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    EmployeeDao employeeDao;
 
     @GetMapping("/")
     public String HomePage(){
@@ -39,6 +38,15 @@ public class EmployeeController {
         hashMap.put("status","success");
         return hashMap;
 
+    }
+
+    @PostMapping(path = "/searchEmployee", produces = "application/json", consumes = "application/json")
+    public List<Employee> SearchEmployee(@RequestBody Employee employee){
+
+        String empCode= String.valueOf(employee.getEmpCode());
+        System.out.println(empCode);
+
+        return (List<Employee>) employeeDao.EmployeeSearch(employee.getEmpCode());
     }
 
 }
