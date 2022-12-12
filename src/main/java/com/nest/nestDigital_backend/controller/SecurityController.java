@@ -35,4 +35,13 @@ public class SecurityController {
         return hashMap;
 
     }
+
+    @PostMapping(path = "/searchSecurity", produces = "application/json", consumes = "application/json")
+    public List<Security> SearchSecurity(@RequestBody Security security){
+
+        String empCode= String.valueOf(security.getEmpCode());
+        System.out.println(empCode);
+
+        return (List<Security>) securityDao.SearchSecurity(security.getEmpCode());
+    }
 }
