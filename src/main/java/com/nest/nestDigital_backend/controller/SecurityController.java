@@ -4,12 +4,10 @@ import com.nest.nestDigital_backend.dao.SecurityDao;
 import com.nest.nestDigital_backend.model.Employee;
 import com.nest.nestDigital_backend.model.Security;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +17,13 @@ public class SecurityController {
 
     @Autowired
     SecurityDao securityDao;
+
+
+    @GetMapping("viewSecurity")
+    public List<Security> ViewAllEmployee(){
+
+        return (List<Security>) securityDao.findAll();
+    }
 
     @PostMapping(path = "/addSecurity", produces = "application/json", consumes = "application/json")
     public Map<String,String> AddSecurity(@RequestBody Security security){
