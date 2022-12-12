@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,6 +24,12 @@ public class EmployeeController {
         return "Home Page";
     }
 
+    @GetMapping("viewEmployee")
+    public List<Employee> ViewAllEmployee(){
+
+        return (List<Employee>) employeeDao.findAll();
+    }
+
     @PostMapping(path = "/addEmployee", produces = "application/json", consumes = "application/json")
     public Map<String,String> AddEmployee(@RequestBody Employee employee){
 
@@ -33,4 +40,5 @@ public class EmployeeController {
         return hashMap;
 
     }
+
 }
