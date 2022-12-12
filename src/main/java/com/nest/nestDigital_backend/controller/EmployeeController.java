@@ -48,5 +48,16 @@ public class EmployeeController {
 
         return (List<Employee>) employeeDao.EmployeeSearch(employee.getEmpCode());
     }
+    @PostMapping(path = "/deleteEmployee", produces = "application/json", consumes = "application/json")
+    public Map<String,String> DeleteEmployee(@RequestBody Employee employee){
+
+        String empCode= String.valueOf(employee.getEmpCode());
+        System.out.println(empCode);
+        employeeDao.EmployeeDelete(employee.getEmpCode());
+
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("status","success");
+        return hashMap;
+    }
 
 }
