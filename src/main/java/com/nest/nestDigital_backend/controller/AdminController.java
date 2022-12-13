@@ -6,6 +6,7 @@ import com.nest.nestDigital_backend.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "*")
 
-public class EmployeeController {
+public class AdminController {
 
     @Autowired
     EmployeeDao employeeDao;
@@ -29,11 +30,12 @@ public class EmployeeController {
         return (List<Employee>) employeeDao.findAll();
     }
 
+
+    DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyy");
     @PostMapping(path = "/addEmployee", produces = "application/json", consumes = "application/json")
     public Map<String,String> AddEmployee(@RequestBody Employee employee){
 
         employeeDao.save(employee);
-
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("status","success");
         return hashMap;

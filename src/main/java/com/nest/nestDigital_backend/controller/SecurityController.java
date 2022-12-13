@@ -1,7 +1,6 @@
 package com.nest.nestDigital_backend.controller;
 
 import com.nest.nestDigital_backend.dao.SecurityDao;
-import com.nest.nestDigital_backend.model.Employee;
 import com.nest.nestDigital_backend.model.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
