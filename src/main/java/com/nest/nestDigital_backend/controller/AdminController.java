@@ -1,7 +1,7 @@
 package com.nest.nestDigital_backend.controller;
 
 
-import com.nest.nestDigital_backend.dao.EmployeeDao;
+import com.nest.nestDigital_backend.dao.AdminDao;
 import com.nest.nestDigital_backend.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
-    EmployeeDao employeeDao;
+    AdminDao adminDao;
 
     @GetMapping("/")
     public String HomePage(){
@@ -27,7 +27,7 @@ public class AdminController {
     @GetMapping("viewEmployee")
     public List<Employee> ViewAllEmployee(){
 
-        return (List<Employee>) employeeDao.findAll();
+        return (List<Employee>) adminDao.findAll();
     }
 
 
@@ -35,7 +35,7 @@ public class AdminController {
     @PostMapping(path = "/addEmployee", produces = "application/json", consumes = "application/json")
     public Map<String,String> AddEmployee(@RequestBody Employee employee){
 
-        employeeDao.save(employee);
+        adminDao.save(employee);
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("status","success");
         return hashMap;
@@ -48,14 +48,14 @@ public class AdminController {
         String empCode= String.valueOf(employee.getEmpCode());
         System.out.println(empCode);
 
-        return (List<Employee>) employeeDao.EmployeeSearch(employee.getEmpCode());
+        return (List<Employee>) adminDao.EmployeeSearch(employee.getEmpCode());
     }
     @PostMapping(path = "/deleteEmployee", produces = "application/json", consumes = "application/json")
     public Map<String,String> DeleteEmployee(@RequestBody Employee employee){
 
         String empCode= String.valueOf(employee.getEmpCode());
         System.out.println(empCode);
-        employeeDao.EmployeeDelete(employee.getEmpCode());
+        adminDao.EmployeeDelete(employee.getEmpCode());
 
         HashMap<String,String> hashMap=new HashMap<>();
         hashMap.put("status","success");
