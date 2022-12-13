@@ -21,8 +21,8 @@ public interface AdminDao extends CrudRepository <Employee,Integer>{
     @Query(value = "DELETE FROM `employee` WHERE `emp_code`=:empCode", nativeQuery = true)
     void EmployeeDelete(@Param("empCode") Integer empCode);
 
-    @Query(value = "SELECT `id`, `designation`, `email`, `emp_code`, `name`, `password`, `phone`, `username` FROM `employee` WHERE `emp_code`= :empCode", nativeQuery = true)
-    List<Employee> UserLoginDetailsById(@Param("empCode") String empCode);
+    @Query(value = "SELECT `id`, `designation`, `email`, `emp_code`, `name`, `password`,`address`,`salary`, `username` FROM `employee` WHERE `emp_code`= :empCode", nativeQuery = true)
+    List<Employee> UserLoginById(@Param("empCode") String empCode);
 
 
 }
