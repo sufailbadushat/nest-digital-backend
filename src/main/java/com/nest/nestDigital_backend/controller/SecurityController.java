@@ -15,7 +15,7 @@ import java.util.Map;
 public class SecurityController {
 
     @Autowired
-    SecurityDao securityDao;
+    private SecurityDao securityDao;
 
 
     @GetMapping("viewSecurity")
@@ -54,6 +54,24 @@ public class SecurityController {
         HashMap<String,String> hashMap=new HashMap<>();
         hashMap.put("status","success");
         return hashMap;
+    }
+
+    @PostMapping(path = "/securityLogin",  produces = "application/json", consumes = "application/json")
+    public Map<String ,String> SecurityLogin(@RequestBody Security security){
+
+        List<Security> result=(List<Security>) securityDao.SecurityLogin(security.getUsername(),security.getPassword());
+
+      HashMap<String,String> hashMap=new HashMap<>();
+      if (result.size()!=0){
+
+          hashMap.put("userInfo", String.valueOf(result.get(0).getId()));
+          hashMap.put("status","success");
+
+      }
+      else {
+          hashMap.put("status","Enter valid Credentials");
+      }
+      return hashMap;
     }
 
 }
