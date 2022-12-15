@@ -90,4 +90,15 @@ public class AdminController {
         return hashMap;
     }
 
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/updateEmployee", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> updateEmployee(@RequestBody Employee emp){
+        System.out.println(emp.getId());
+        adminDao.UpdateEmployee(emp.getId(),emp.getAddress(), emp.getDesignation(), emp.getEmail(), emp.getEmpCode(), emp.getName(), emp.getPassword(), emp.getUsername(), emp.getSalary());
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("status","success");
+        return hashMap;
+    }
+
 }

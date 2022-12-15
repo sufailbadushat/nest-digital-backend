@@ -24,6 +24,13 @@ public interface AdminDao extends CrudRepository <Employee,Integer>{
     @Query(value = "SELECT `id`, `designation`, `email`, `emp_code`, `name`, `password`,`address`,`salary`, `username` FROM `employee` WHERE `emp_code`= :empCode", nativeQuery = true)
     List<Employee> UserLoginById(@Param("empCode") String empCode);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE `employee` SET `address`=:address, `designation`=:designation,`email`=:email, `emp_code`=:empCode ,`name`= :name,`password`=:password,`salary`=:salary,`username`=:username WHERE `id`=:id", nativeQuery = true)
+    void UpdateEmployee(@Param("id") int id,@Param("address") String address, @Param("designation") String designation,@Param("email") String email,@Param("empCode") int empCode,@Param("name") String name,@Param("password") String password,@Param("username") String username, @Param("salary") int salary);
+
+
+
 
 }
 
