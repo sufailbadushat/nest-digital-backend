@@ -75,7 +75,20 @@ public class AdminController {
         String empCode = String.valueOf(employee.getEmpCode());
         System.out.println(empCode);
 
+
         return (List<Employee>) adminDao.EmployeeSearch(employee.getEmpCode());
+    }
+
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/getEmpById", produces = "application/json", consumes = "application/json")
+    public List<Employee> getEmpById(@RequestBody Employee employee) {
+
+        String id = String.valueOf(employee.getId());
+        System.out.println(id);
+
+
+        return (List<Employee>) adminDao.SearchById(employee.getId());
     }
 
     @PostMapping(path = "/deleteEmployee", produces = "application/json", consumes = "application/json")

@@ -16,6 +16,10 @@ public interface AdminDao extends CrudRepository <Employee,Integer>{
     @Query(value = "SELECT `id`, `address`, `designation`, `email`, `emp_code`, `name`, `password`, `salary`, `username` FROM `employee` WHERE `emp_code`=:empCode", nativeQuery = true)
     List<Employee> EmployeeSearch(@Param("empCode") Integer empCode);
 
+    @Query(value = "SELECT `id`, `address`, `designation`, `email`, `emp_code`, `name`, `password`, `salary`, `username` FROM `employee` WHERE `id`=:id", nativeQuery = true)
+    List<Employee> SearchById(@Param("id") Integer id);
+
+
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM `employee` WHERE `emp_code`=:empCode", nativeQuery = true)
