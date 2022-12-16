@@ -28,6 +28,7 @@ public class EmpController {
     AdminDao adminDao;
 
 
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/addEmpLog", produces = "application/json", consumes = "application/json")
     public Map<String,String> AddEmpLog(@RequestBody EmpEntry empEntry){
 

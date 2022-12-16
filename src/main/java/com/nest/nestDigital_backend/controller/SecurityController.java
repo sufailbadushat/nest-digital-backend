@@ -1,6 +1,7 @@
 package com.nest.nestDigital_backend.controller;
 
 import com.nest.nestDigital_backend.dao.SecurityDao;
+import com.nest.nestDigital_backend.model.Employee;
 import com.nest.nestDigital_backend.model.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +73,17 @@ public class SecurityController {
           hashMap.put("status","Enter valid Credentials");
       }
       return hashMap;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/getSecurityById", produces = "application/json", consumes = "application/json")
+    public List<Security> getEmpById(@RequestBody Security security) {
+
+        String id = String.valueOf(security.getId());
+        System.out.println(id);
+
+
+        return (List<Security>) securityDao.SearchSecurityById(security.getId());
     }
 
 }
