@@ -2,17 +2,15 @@ package com.nest.nestDigital_backend.controller;
 
 import com.nest.nestDigital_backend.dao.LeaveApplyDao;
 import com.nest.nestDigital_backend.model.Leave;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class LeaveController {
@@ -33,6 +31,12 @@ public class LeaveController {
         leaveApplyDao.save(leave);
         map.put("status", "success");
         return map;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/viewLeaves")
+    public List<Leave> viewLeaves(){
+        return (List<Leave>) leaveApplyDao.findAll();
     }
 
 
