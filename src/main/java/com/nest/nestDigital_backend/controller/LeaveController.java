@@ -40,4 +40,13 @@ public class LeaveController {
     }
 
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchLeaves",consumes = "application/json",produces = "application/json")
+    public List<Leave> searchLeaves(@RequestBody  Leave leave){
+
+        System.out.println(leave.getEmpid());
+        return (List<Leave>) leaveApplyDao.searchLeaves(leave.getEmpid());
+    }
+
+
 }
