@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class LeaveController {
@@ -48,5 +49,11 @@ public class LeaveController {
         return (List<Leave>) leaveApplyDao.searchLeaves(leave.getEmpid());
     }
 
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/Leaves")
+    public List<Map<String,String>> Leave(){
+        return (List<Map<String, String>>) leaveApplyDao.Leaves();
+    }
 
 }
