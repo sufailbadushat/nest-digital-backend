@@ -56,4 +56,17 @@ public class LeaveController {
         return (List<Map<String, String>>) leaveApplyDao.Leaves();
     }
 
+
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/editLeaves",consumes = "application/json",produces = "application/json")
+    public HashMap<String, String> editLeaves(@RequestBody Leave leaves){
+
+        HashMap<String,String> map = new HashMap<>();
+        System.out.println(leaves.getStatus()+"  "+leaves.getId()+"  "+leaves.getRemarks());
+        leaveApplyDao.updateLeave(leaves.getStatus(),leaves.getRemarks(),leaves.getId());
+        map.put("status","success");
+        return map;
+    }
+
 }
