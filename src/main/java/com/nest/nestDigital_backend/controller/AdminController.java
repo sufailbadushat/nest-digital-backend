@@ -2,7 +2,7 @@ package com.nest.nestDigital_backend.controller;
 
 
 import com.nest.nestDigital_backend.dao.AdminDao;
-import com.nest.nestDigital_backend.dao.LeaveDao;
+import com.nest.nestDigital_backend.dao.LeaveTotalDao;
 import com.nest.nestDigital_backend.model.Employee;
 import com.nest.nestDigital_backend.model.Leavetotal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class AdminController {
     @Autowired
     AdminDao adminDao;
     @Autowired
-    LeaveDao leaveDao;
+    LeaveTotalDao leaveTotalDao;
 
     @GetMapping("/")
     public String HomePage() {
@@ -53,7 +53,7 @@ public class AdminController {
             leavetotal.setCasualLeave(20);
             leavetotal.setSickLeave(7);
             leavetotal.setSpecialLeave(3);
-            leaveDao.save(leavetotal);
+            leaveTotalDao.save(leavetotal);
             hashMap.put("status", "success");
 //        }
 //        else {

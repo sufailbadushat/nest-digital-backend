@@ -1,7 +1,7 @@
 package com.nest.nestDigital_backend.controller;
 
 import com.nest.nestDigital_backend.dao.LeaveApplyDao;
-import com.nest.nestDigital_backend.model.Leave;
+import com.nest.nestDigital_backend.model.LeaveApply;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,32 +21,32 @@ public class LeaveController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/addLeaves", consumes = "application/json", produces = "application/json")
-    public HashMap<String, String> addLeaves(@RequestBody Leave leave) {
+    public HashMap<String, String> addLeaves(@RequestBody LeaveApply leaveApply) {
 
         HashMap<String, String> map = new HashMap<>();
-        System.out.println(leave.toString());
-        LocalDate from = LocalDate.parse(String.valueOf(leave.getFrom()));
-        LocalDate to = LocalDate.parse(String.valueOf(leave.getTo()));
+        System.out.println(leaveApply.toString());
+        LocalDate from = LocalDate.parse(String.valueOf(leaveApply.getFrom()));
+        LocalDate to = LocalDate.parse(String.valueOf(leaveApply.getTo()));
         long diffInDays = ChronoUnit.DAYS.between(from, to);
-        leave.setDays((int) diffInDays+1);
-        leaveApplyDao.save(leave);
+        leaveApply.setDays((int) diffInDays+1);
+        leaveApplyDao.save(leaveApply);
         map.put("status", "success");
         return map;
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/viewLeaves")
-    public List<Leave> viewLeaves(){
-        return (List<Leave>) leaveApplyDao.findAll();
+    public List<LeaveApply> viewLeaves(){
+        return (List<LeaveApply>) leaveApplyDao.findAll();
     }
 
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/searchLeaves",consumes = "application/json",produces = "application/json")
-    public List<Leave> searchLeaves(@RequestBody  Leave leave){
+    public List<LeaveApply> searchLeaves(@RequestBody LeaveApply leaveApply){
 
-        System.out.println(leave.getEmpid());
-        return (List<Leave>) leaveApplyDao.searchLeaves(leave.getEmpid());
+        System.out.println(leaveApply.getEmpid());
+        return (List<LeaveApply>) leaveApplyDao.searchLeaves(leaveApply.getEmpid());
     }
 
 
@@ -60,7 +60,7 @@ public class LeaveController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/editLeaves",consumes = "application/json",produces = "application/json")
-    public HashMap<String, String> editLeaves(@RequestBody Leave leaves){
+    public HashMap<String, String> editLeaves(@RequestBody LeaveApply leaves){
 
         HashMap<String,String> map = new HashMap<>();
         System.out.println(leaves.getStatus()+"  "+leaves.getId()+"  "+leaves.getRemarks());

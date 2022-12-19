@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @Table(name = "leaves")
-public class Leave {
+public class LeaveApply {
 
     @Id
     @GeneratedValue()
@@ -22,10 +22,10 @@ public class Leave {
     private String to;
     private int days;
 
-    public Leave() {
+    public LeaveApply() {
     }
 
-    public Leave(int id, String reason, int status, int emp_id, String typeOfleave, String remarks, String from, String to, int days) {
+    public LeaveApply(int id, String reason, int status, int emp_id, String typeOfleave, String remarks, String from, String to, int days) {
         this.id = id;
         this.reason = reason;
         this.status = status;
